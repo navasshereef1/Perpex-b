@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
-import Script from "next/script"; // Imported Script component
+import Script from "next/script"; // Required for the Pixel to work safely
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,7 +30,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      {/* Meta Pixel Script */}
+      {/* 1. The Meta Pixel JavaScript Logic */}
       <Script
         id="meta-pixel"
         strategy="afterInteractive"
@@ -49,12 +49,12 @@ export default function RootLayout({
           `,
         }}
       />
-      
+
       <body
         suppressHydrationWarning={true}
         className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
       >
-        {/* Meta Pixel NoScript Fallback */}
+        {/* 2. The Meta Pixel NoScript Fallback (Safety mechanism) */}
         <noscript>
           <img
             height="1"
